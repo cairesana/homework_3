@@ -23,5 +23,5 @@ These are the requirements for your application on which you will be scored.
 1. Create a React app (---DONE---)
 1. Add the required dependencies for Redux to the project. (---DONE--- yarn add redux react-redux)
 1. Create a store in the file `src/store.js` like you've learned, which requires an empty reducer which should be in `src/reducers/index.js`. (---DONE---)
-1. Add the `Provider` component to your `src/index.js`.
-1. Add the game lib to the project in a file `src/lib/game.js`. _Use the link in the first paragraph of this document._
+1. Add the `Provider` component to your `src/index.js`. (---DONE---)
+1. Add the game lib to the project in a file `src/lib/game.js`. _Use the link in the first paragraph of this document._ (---DONE---)
