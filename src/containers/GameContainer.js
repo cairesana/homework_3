@@ -5,8 +5,7 @@
 // randomWord???
 
 import * as React from 'react'
-import { makeGuess } from '../actions/game'
-import { newGame } from '../actions/game'
+import { makeGuess, newGame, isGameFinished } from '../actions/game'
 import { Component } from 'react';
 import { showGuess, wrongGuessCount } from '../lib/game';
 //import './App.css';
@@ -22,7 +21,10 @@ export class GameContainer extends Component {
   componentDidMount() {
     this.props.newGame();  }
 
-
+  handleOnClick(event, letter) {
+    this.props.makeGuess(letter)
+    this.props.isGameFinished()
+  }
 
   render() {
     return (
@@ -30,7 +32,7 @@ export class GameContainer extends Component {
         <h1 className="App-title">{wrongGuessCount(this.props.word, this.props.guesses)}</h1>
 
         <hr /> {/*line*/}
-        {alphabet.split('').map(letter => <span className="letter" onClick={e => this.props.makeGuess(letter)}>{letter}</span>)}
+        {alphabet.split('').map(letter => <span className="letter" onClick={e => this.handleOnClick(e, letter)}>{letter}</span>)}
         <hr /> {/*split quebra letra por letra e transforma num array pra poder fazer map*/}
 
         {showGuess(this.props.word, this.props.guesses)}
@@ -38,6 +40,11 @@ export class GameContainer extends Component {
         <hr />
 
         <button onClick={this.props.newGame}>Start New game</button>
+
+        {this.props.finished && 'Game Finished. '}
+        {this.props.hasWon &&  this.props.finished && 'You won!'}
+        {!this.props.hasWon &&  this.props.finished && 'You lost!'}
+
       </div>
     );
   }
@@ -45,12 +52,15 @@ export class GameContainer extends Component {
 
 const mapStateToProps = state => ({
   word: state.game.word,
-  guesses: state.game.guesses
+  guesses: state.game.guesses,
+  hasWon: state.game.hasWon,
+  finished: state.game.finished
 });
 
 const mapDispatchToProps = dispatch => ({
   makeGuess: (letter) => dispatch(makeGuess(letter)),
-  newGame: () => dispatch(newGame())
+  newGame: () => dispatch(newGame()),
+  isGameFinished: () => dispatch(isGameFinished())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(GameContainer);

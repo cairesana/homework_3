@@ -17,8 +17,8 @@ export function makeGuess(letter) {
   }
 }
 
-export function increaseNumber() {
+export function isGameFinished() {
   return {
-    type: 'INCREASE_NUMBER',
+    type: 'IS_GAME_FINISHED',
   }
-} // onde ta usando isso? 
+}

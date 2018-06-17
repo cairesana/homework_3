@@ -18,18 +18,24 @@
 //   }
 // }
 
-import { randomWord } from '../lib/game';
+import { randomWord, gameFinished, isWinner } from '../lib/game';
 
 export default (state = {
   guesses: [],
-  word: ''
+  word: '',
+  finished: false,
+  hasWon: false,
 }, action = {}) => {
+
 
   switch (action.type) {
   case 'NEW_GAME':
     return {
       ...state,
-      word: randomWord()
+      word: randomWord(),
+      finished: false,
+      hasWon: false,
+      guesses: [] //reseta e volta ao estado inicial
     }
 
   case 'MAKE_GUESS':
@@ -37,6 +43,15 @@ export default (state = {
       ...state,
       guesses: state.guesses.concat(action.letter)
     }
+
+  case 'IS_GAME_FINISHED':
+    return {
+      ...state,
+      finished: gameFinished(state.word, state.guesses),
+      hasWon: isWinner(state.word, state.guesses)
+    }
+
+
   default:
     break;
   }
