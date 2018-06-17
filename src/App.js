@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import InitialPgGame from './containers/InitialPgGame';
-//import GameContainer from './containers/GameContainer';
+import GameContainer from './containers/GameContainer';
 import { Route } from 'react-router-dom'
 
 
@@ -15,7 +15,7 @@ class App extends Component {
           <h1 className="App-title">Welcome to React</h1>
         </header>
         <Route exact path='/' component={InitialPgGame} />
-        {/*<Route exact path=`/hangman` component={GameContainer} />*/}
+        <Route exact path='/hangman' component={GameContainer} />
       </div>
     );
   }
